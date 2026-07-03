@@ -21,6 +21,11 @@ const buildCacheKey = (params: GetCharactersParams): string => {
   return `characters:${JSON.stringify(params)}`;
 };
 
+// Escapa los comodines propios de SQL LIKE (%, _) para que una busqueda por
+// texto se trate como literal y no como patron (ej. buscar "%" no debe traer
+// todos los personajes).
+const escapeLikePattern = (value: string): string => value.replace(/[%_]/g, '\\$&');
+
 type RawComment = { id: number; characterId: number; content: string; createdAt: Date };
 
 // Sequelize devuelve `createdAt` como Date; el schema GraphQL lo tipa String!,
@@ -48,7 +53,7 @@ export const characterService = {
     const { filter, sortByName } = params;
 
     if (filter?.name) {
-      where.name = { [Op.like]: `%${filter.name}%` };
+      where.name = { [Op.like]: `%${escapeLikePattern(filter.name)}%` };
     }
     if (filter?.status) {
       where.status = filter.status;
@@ -60,7 +65,7 @@ export const characterService = {
       where.gender = filter.gender;
     }
     if (filter?.origin) {
-      where.origin = { [Op.like]: `%${filter.origin}%` };
+      where.origin = { [Op.like]: `%${escapeLikePattern(filter.origin)}%` };
     }
 
     const characters = await Character.findAll({
