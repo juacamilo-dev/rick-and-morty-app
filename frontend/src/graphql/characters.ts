@@ -15,3 +15,43 @@ export const GET_CHARACTERS = gql`
     }
   }
 `;
+
+export const GET_CHARACTER = gql`
+  query GetCharacter($id: ID!) {
+    character(id: $id) {
+      id
+      externalId
+      name
+      status
+      species
+      gender
+      origin
+      image
+      isFavorite
+      comments {
+        id
+        content
+        createdAt
+      }
+    }
+  }
+`;
+
+export const TOGGLE_FAVORITE = gql`
+  mutation ToggleFavorite($characterId: ID!) {
+    toggleFavorite(characterId: $characterId) {
+      id
+      isFavorite
+    }
+  }
+`;
+
+export const ADD_COMMENT = gql`
+  mutation AddComment($characterId: ID!, $content: String!) {
+    addComment(characterId: $characterId, content: $content) {
+      id
+      content
+      createdAt
+    }
+  }
+`;

@@ -1,3 +1,5 @@
+import type { Comment } from './comment';
+
 export interface Character {
   id: string;
   externalId: number;
@@ -8,4 +10,8 @@ export interface Character {
   origin: string;
   image: string;
   isFavorite: boolean;
+}
+
+export interface CharacterDetail extends Character {
+  comments: Comment[];
 }
