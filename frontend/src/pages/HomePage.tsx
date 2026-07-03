@@ -134,7 +134,7 @@ function HomePage() {
 
       <section className="flex-1 p-6">
         {selectedId ? (
-          <CharacterDetail characterId={selectedId} />
+          <CharacterDetail characterId={selectedId} onDeleted={() => setSelectedId(null)} />
         ) : (
           <p className="text-gray-400">Select a character to see the details.</p>
         )}

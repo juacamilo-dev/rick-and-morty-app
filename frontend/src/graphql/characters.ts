@@ -55,3 +55,11 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const SOFT_DELETE_CHARACTER = gql`
+  mutation SoftDeleteCharacter($characterId: ID!) {
+    softDeleteCharacter(characterId: $characterId) {
+      id
+    }
+  }
+`;
