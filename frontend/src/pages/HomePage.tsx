@@ -86,6 +86,10 @@ function HomePage() {
     setIsPanelOpen(false);
   };
 
+  const handleSelectCharacter = (id: string) => {
+    setSelectedId((currentId) => (currentId === id ? null : id));
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-white md:flex-row">
       <aside className="w-full border-b border-gray-200 p-4 md:w-96 md:border-b-0 md:border-r md:p-6">
@@ -127,7 +131,7 @@ function HomePage() {
           <CharacterList
             characters={displayedCharacters}
             selectedId={selectedId}
-            onSelect={setSelectedId}
+            onSelect={handleSelectCharacter}
           />
         )}
       </aside>
