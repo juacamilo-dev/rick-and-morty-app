@@ -69,9 +69,9 @@ function HomePage() {
     (appliedFilters.status !== '' ? 1 : 0) +
     (appliedFilters.gender !== '' ? 1 : 0);
 
-  const handleOpenPanel = () => {
-    setDraftFilters(appliedFilters);
-    setIsPanelOpen(true);
+  const handleToggleFilterPanel = () => {
+    if (!isPanelOpen) setDraftFilters(appliedFilters);
+    setIsPanelOpen(!isPanelOpen);
   };
 
   const handleApplyFilters = () => {
@@ -92,7 +92,7 @@ function HomePage() {
         <h1 className="mb-4 text-xl font-semibold text-gray-900">Rick and Morty list</h1>
 
         <div className="relative mb-3 flex items-center justify-between gap-3">
-          <SearchBar value={name} onChange={setName} onToggleFilters={handleOpenPanel} />
+          <SearchBar value={name} onChange={setName} onToggleFilters={handleToggleFilterPanel} />
 
           {isPanelOpen && (
             <FilterPanel

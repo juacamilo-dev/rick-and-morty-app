@@ -87,7 +87,12 @@ function FilterPanel(props: FilterPanelProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
+      const target = event.target as HTMLElement;
+      // El boton de sliders maneja su propio toggle (abrir/cerrar); si el
+      // click viene de ahi, se ignora para no cerrar y reabrir en el mismo gesto.
+      if (target.closest('[data-filter-toggle]')) return;
+
+      if (panelRef.current && !panelRef.current.contains(target)) {
         onClose();
       }
     };

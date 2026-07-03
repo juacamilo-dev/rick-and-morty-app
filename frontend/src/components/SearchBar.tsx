@@ -20,6 +20,7 @@ function SearchBar({ value, onChange, onToggleFilters }: SearchBarProps) {
         type="button"
         onClick={onToggleFilters}
         aria-label="Open filters"
+        data-filter-toggle
         className="shrink-0 text-gray-500 hover:text-purple-600"
       >
         <SlidersHorizontal size={18} />
