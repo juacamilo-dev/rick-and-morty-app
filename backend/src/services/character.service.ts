@@ -21,6 +21,17 @@ const buildCacheKey = (params: GetCharactersParams): string => {
   return `characters:${JSON.stringify(params)}`;
 };
 
+type RawComment = { id: number; characterId: number; content: string; createdAt: Date };
+
+// Sequelize devuelve `createdAt` como Date; el schema GraphQL lo tipa String!,
+// asi que se serializa a ISO aqui antes de que graphql-js intente coaccionarlo
+// (Date.valueOf() da epoch en vez de ISO si no se convierte primero).
+const serializeComments = (comments: RawComment[] = []) =>
+  comments.map((comment) => ({
+    ...comment,
+    createdAt: new Date(comment.createdAt).toISOString(),
+  }));
+
 export const characterService = {
   async getCharacters(params: GetCharactersParams) {
     const cacheKey = buildCacheKey(params);
@@ -54,14 +65,25 @@ export const characterService = {
 
     const characters = await Character.findAll({
       where,
-      include: [{ model: Favorite, as: 'favorite', required: !!filter?.onlyFavorites }],
+      include: [
+        { model: Favorite, as: 'favorite', required: !!filter?.onlyFavorites },
+        { model: Comment, as: 'comments' },
+      ],
       order: sortByName ? [['name', sortByName]] : undefined,
     });
 
-    const result = characters.map((character) => ({
-      ...character.toJSON(),
-      isFavorite: !!(character as any).favorite,
-    }));
+    const result = characters.map((character) => {
+      const plainCharacter = character.toJSON() as CharacterAttributes & {
+        favorite?: unknown;
+        comments?: RawComment[];
+      };
+
+      return {
+        ...plainCharacter,
+        isFavorite: !!plainCharacter.favorite,
+        comments: serializeComments(plainCharacter.comments),
+      };
+    });
 
     await redisClient.set(cacheKey, JSON.stringify(result), 'EX', CACHE_TTL);
 
@@ -83,16 +105,13 @@ export const characterService = {
     // planos; el tipado de CharacterAttributes no las declara, por eso el cast.
     const plainCharacter = character.toJSON() as CharacterAttributes & {
       favorite?: unknown;
-      comments?: Array<{ id: number; characterId: number; content: string; createdAt: Date }>;
+      comments?: RawComment[];
     };
 
     return {
       ...plainCharacter,
       isFavorite: !!plainCharacter.favorite,
-      comments: (plainCharacter.comments || []).map((comment) => ({
-        ...comment,
-        createdAt: new Date(comment.createdAt).toISOString(),
-      })),
+      comments: serializeComments(plainCharacter.comments),
     };
   },
 

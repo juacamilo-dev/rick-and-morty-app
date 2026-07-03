@@ -1,4 +1,5 @@
 import { Comment } from '../models';
+import { characterService } from './character.service';
 
 export const commentService = {
   async addComment(characterId: number, content: string) {
@@ -8,6 +9,9 @@ export const commentService = {
     }
 
     const comment = await Comment.create({ characterId, content: trimmedContent });
+
+    await characterService.invalidateCharactersCache();
+
     return {
       ...comment.toJSON(),
       createdAt: comment.createdAt.toISOString(),
