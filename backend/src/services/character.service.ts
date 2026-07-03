@@ -1,5 +1,6 @@
 import { Op, WhereOptions } from 'sequelize';
 import { Character, Favorite, Comment } from '../models';
+import type { CharacterAttributes } from '../models/Character';
 import { redisClient, CACHE_TTL } from '../config/redis';
 
 interface CharacterFilterInput {
@@ -78,9 +79,20 @@ export const characterService = {
 
     if (!character) return null;
 
+    // toJSON() ya convierte las asociaciones incluidas (favorite, comments) a objetos
+    // planos; el tipado de CharacterAttributes no las declara, por eso el cast.
+    const plainCharacter = character.toJSON() as CharacterAttributes & {
+      favorite?: unknown;
+      comments?: Array<{ id: number; characterId: number; content: string; createdAt: Date }>;
+    };
+
     return {
-      ...character.toJSON(),
-      isFavorite: !!(character as any).favorite,
+      ...plainCharacter,
+      isFavorite: !!plainCharacter.favorite,
+      comments: (plainCharacter.comments || []).map((comment) => ({
+        ...comment,
+        createdAt: new Date(comment.createdAt).toISOString(),
+      })),
     };
   },
 
