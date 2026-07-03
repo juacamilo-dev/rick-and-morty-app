@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ERD - Rick and Morty App" id="erd-rick-and-morty">
+    <mxGraphModel dx="1000" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- characters table -->
+        <mxCell id="tbl-characters" value="characters" style="swimlane;whiteSpace=wrap;html=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="260" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-id" value="id: INTEGER (PK)" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];fontStyle=4;" vertex="1" parent="tbl-characters">
+          <mxGeometry y="30" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-externalId" value="externalId: INTEGER (UNIQUE)" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-characters">
+          <mxGeometry y="56" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-name" value="name: STRING" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-characters">
+          <mxGeometry y="82" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-status" value="status: STRING" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-characters">
+          <mxGeometry y="108" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-species" value="species: STRING" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-characters">
+          <mxGeometry y="134" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-gender" value="gender: STRING" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-characters">
+          <mxGeometry y="160" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-origin" value="origin: STRING" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-characters">
+          <mxGeometry y="186" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-image" value="image: STRING" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-characters">
+          <mxGeometry y="212" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-isDeleted" value="isDeleted: BOOLEAN (default false)" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-characters">
+          <mxGeometry y="238" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="chr-timestamps" value="createdAt / updatedAt: DATE" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-characters">
+          <mxGeometry y="264" width="260" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- favorites table -->
+        <mxCell id="tbl-favorites" value="favorites" style="swimlane;whiteSpace=wrap;html=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;marginBottom=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;align=center;" vertex="1" parent="1">
+          <mxGeometry x="480" y="80" width="260" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="fav-id" value="id: INTEGER (PK)" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];fontStyle=4;" vertex="1" parent="tbl-favorites">
+          <mxGeometry y="30" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fav-characterId" value="characterId: INTEGER (FK, UNIQUE)" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-favorites">
+          <mxGeometry y="56" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fav-timestamps" value="createdAt / updatedAt: DATE" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-favorites">
+          <mxGeometry y="82" width="260" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- comments table -->
+        <mxCell id="tbl-comments" value="comments" style="swimlane;whiteSpace=wrap;html=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;marginBottom=0;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=14;align=center;" vertex="1" parent="1">
+          <mxGeometry x="480" y="340" width="260" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="com-id" value="id: INTEGER (PK)" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];fontStyle=4;" vertex="1" parent="tbl-comments">
+          <mxGeometry y="30" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="com-characterId" value="characterId: INTEGER (FK)" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-comments">
+          <mxGeometry y="56" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="com-content" value="content: TEXT" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-comments">
+          <mxGeometry y="82" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="com-timestamps" value="createdAt / updatedAt: DATE" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=6;overflow=hidden;portConstraint=eastwest;points=[[0,0.5],[1,0.5]];" vertex="1" parent="tbl-comments">
+          <mxGeometry y="108" width="260" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- relationships -->
+        <mxCell id="rel-fav" value="1 : 1" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERone;startArrow=ERone;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="chr-id" target="fav-characterId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel-com" value="1 : N" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmany;startArrow=ERone;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="chr-id" target="com-characterId">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
