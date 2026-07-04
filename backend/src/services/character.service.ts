@@ -43,11 +43,8 @@ export const characterService = {
 
     const cached = await redisClient.get(cacheKey);
     if (cached) {
-      console.log(`[Cache] HIT -> ${cacheKey}`);
       return JSON.parse(cached);
     }
-
-    console.log(`[Cache] MISS -> ${cacheKey}`);
 
     const where: WhereOptions = { isDeleted: false };
     const { filter, sortByName } = params;
@@ -124,7 +121,6 @@ export const characterService = {
     const keys = await redisClient.keys('characters:*');
     if (keys.length > 0) {
       await redisClient.del(...keys);
-      console.log(`[Cache] Invalidadas ${keys.length} claves de personajes.`);
     }
   },
 };
