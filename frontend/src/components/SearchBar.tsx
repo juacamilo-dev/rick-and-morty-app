@@ -8,7 +8,7 @@ interface SearchBarProps {
 
 function SearchBar({ value, onChange, onToggleFilters }: SearchBarProps) {
   return (
-    <div className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2">
+    <div className="flex w-full items-center gap-2 rounded-lg border border-gray-200 px-3 py-2">
       <input
         type="text"
         placeholder="Search character..."
