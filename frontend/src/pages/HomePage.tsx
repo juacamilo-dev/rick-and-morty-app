@@ -92,48 +92,52 @@ function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-white md:h-screen md:flex-row md:overflow-hidden">
-      <aside className="w-full border-b border-gray-200 p-4 md:w-96 md:h-full md:overflow-y-auto md:border-b-0 md:border-r md:p-6">
-        <h1 className="mb-4 text-xl font-semibold text-gray-900">Rick and Morty list</h1>
+      <aside className="flex w-full flex-col border-b border-gray-200 p-4 md:w-96 md:h-full md:border-b-0 md:border-r md:p-6">
+        <div className="shrink-0">
+          <h1 className="mb-4 text-xl font-semibold text-gray-900">Rick and Morty list</h1>
 
-        <div className="relative mb-4 flex items-center justify-between gap-3">
-          <SearchBar value={name} onChange={setName} onToggleFilters={handleToggleFilterPanel} />
+          <div className="relative mb-4 flex items-center justify-between gap-3">
+            <SearchBar value={name} onChange={setName} onToggleFilters={handleToggleFilterPanel} />
 
-          {isPanelOpen && (
-            <FilterPanel
-              draft={draftFilters}
-              onChange={setDraftFilters}
-              onApply={handleApplyFilters}
-              onClear={handleClearFilters}
-              onClose={() => setIsPanelOpen(false)}
-              speciesOptions={speciesOptions}
-              statusOptions={statusOptions}
-              genderOptions={genderOptions}
-            />
+            {isPanelOpen && (
+              <FilterPanel
+                draft={draftFilters}
+                onChange={setDraftFilters}
+                onApply={handleApplyFilters}
+                onClear={handleClearFilters}
+                onClose={() => setIsPanelOpen(false)}
+                speciesOptions={speciesOptions}
+                statusOptions={statusOptions}
+                genderOptions={genderOptions}
+              />
+            )}
+          </div>
+
+          <div className="mb-4 flex items-center justify-between">
+            <SortControl value={sortOrder} onChange={setSortOrder} />
+          </div>
+
+          {activeFilterCount > 0 && (
+            <div className="mb-4 flex items-center gap-2">
+              <span className="text-sm text-gray-500">{displayedCharacters.length} Results</span>
+              <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
+                {activeFilterCount} Filter{activeFilterCount > 1 ? 's' : ''}
+              </span>
+            </div>
           )}
         </div>
 
-        <div className="mb-4 flex items-center justify-between">
-          <SortControl value={sortOrder} onChange={setSortOrder} />
+        <div className="md:min-h-0 md:flex-1 md:overflow-y-auto">
+          {loading && <p className="text-sm text-gray-500">Loading characters...</p>}
+          {error && <p className="text-sm text-red-500">Error loading characters.</p>}
+          {data && (
+            <CharacterList
+              characters={displayedCharacters}
+              selectedId={selectedId}
+              onSelect={handleSelectCharacter}
+            />
+          )}
         </div>
-
-        {activeFilterCount > 0 && (
-          <div className="mb-4 flex items-center gap-2">
-            <span className="text-sm text-gray-500">{displayedCharacters.length} Results</span>
-            <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
-              {activeFilterCount} Filter{activeFilterCount > 1 ? 's' : ''}
-            </span>
-          </div>
-        )}
-
-        {loading && <p className="text-sm text-gray-500">Loading characters...</p>}
-        {error && <p className="text-sm text-red-500">Error loading characters.</p>}
-        {data && (
-          <CharacterList
-            characters={displayedCharacters}
-            selectedId={selectedId}
-            onSelect={handleSelectCharacter}
-          />
-        )}
       </aside>
 
       <section className="hidden flex-1 p-6 md:block md:h-full md:overflow-y-auto">
