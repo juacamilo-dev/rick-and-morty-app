@@ -91,8 +91,8 @@ function HomePage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-white md:flex-row">
-      <aside className="w-full border-b border-gray-200 p-4 md:w-96 md:border-b-0 md:border-r md:p-6">
+    <div className="flex min-h-screen flex-col bg-white md:h-screen md:flex-row md:overflow-hidden">
+      <aside className="w-full border-b border-gray-200 p-4 md:w-96 md:h-full md:overflow-y-auto md:border-b-0 md:border-r md:p-6">
         <h1 className="mb-4 text-xl font-semibold text-gray-900">Rick and Morty list</h1>
 
         <div className="relative mb-3 flex items-center justify-between gap-3">
@@ -136,7 +136,7 @@ function HomePage() {
         )}
       </aside>
 
-      <section className="flex-1 p-6">
+      <section className="flex-1 p-6 md:h-full md:overflow-y-auto">
         {selectedId ? (
           <CharacterDetail characterId={selectedId} onDeleted={() => setSelectedId(null)} />
         ) : (
