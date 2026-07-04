@@ -13,9 +13,11 @@ interface GetCharactersData {
   characters: Character[];
 }
 
-function uniqueSorted(values: string[]): string[] {
-  return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b));
-}
+// Valores reales presentes entre los 15 personajes sembrados (confirmado via GraphQL).
+// Evita una segunda query solo para derivar las opciones del FilterPanel.
+const SPECIES_OPTIONS = ['Alien', 'Human'];
+const STATUS_OPTIONS = ['Alive', 'Dead', 'unknown'];
+const GENDER_OPTIONS = ['Female', 'Male', 'unknown'];
 
 function HomePage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -24,21 +26,6 @@ function HomePage() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [appliedFilters, setAppliedFilters] = useState<FilterState>(DEFAULT_FILTERS);
   const [draftFilters, setDraftFilters] = useState<FilterState>(DEFAULT_FILTERS);
-
-  const { data: optionsData } = useQuery<GetCharactersData>(GET_CHARACTERS);
-
-  const speciesOptions = useMemo(
-    () => uniqueSorted(optionsData?.characters.map((c) => c.species) ?? []),
-    [optionsData],
-  );
-  const statusOptions = useMemo(
-    () => uniqueSorted(optionsData?.characters.map((c) => c.status) ?? []),
-    [optionsData],
-  );
-  const genderOptions = useMemo(
-    () => uniqueSorted(optionsData?.characters.map((c) => c.gender) ?? []),
-    [optionsData],
-  );
 
   const { data, loading, error } = useQuery<GetCharactersData>(GET_CHARACTERS, {
     variables: {
@@ -118,9 +105,9 @@ function HomePage() {
                 onApply={handleApplyFilters}
                 onClear={handleClearFilters}
                 onClose={() => setIsPanelOpen(false)}
-                speciesOptions={speciesOptions}
-                statusOptions={statusOptions}
-                genderOptions={genderOptions}
+                speciesOptions={SPECIES_OPTIONS}
+                statusOptions={STATUS_OPTIONS}
+                genderOptions={GENDER_OPTIONS}
               />
             )}
           </div>
