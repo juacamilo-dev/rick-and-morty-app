@@ -136,13 +136,27 @@ function HomePage() {
         )}
       </aside>
 
-      <section className="flex-1 p-6 md:h-full md:overflow-y-auto">
+      <section className="hidden flex-1 p-6 md:block md:h-full md:overflow-y-auto">
         {selectedId ? (
           <CharacterDetail characterId={selectedId} onDeleted={() => setSelectedId(null)} />
         ) : (
           <p className="text-gray-400">Select a character to see the details.</p>
         )}
       </section>
+
+      {selectedId && (
+        <div className="fixed inset-0 z-40 overflow-y-auto bg-white p-4 md:hidden">
+          <button
+            type="button"
+            onClick={() => setSelectedId(null)}
+            aria-label="Back"
+            className="mb-4 text-xl"
+          >
+            ←
+          </button>
+          <CharacterDetail characterId={selectedId} onDeleted={() => setSelectedId(null)} />
+        </div>
+      )}
     </div>
   );
 }
