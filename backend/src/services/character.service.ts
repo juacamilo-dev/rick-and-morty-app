@@ -3,7 +3,7 @@ import { Character, Favorite, Comment } from '../models';
 import type { CharacterAttributes } from '../models/Character';
 import { redisClient, CACHE_TTL } from '../config/redis';
 
-interface CharacterFilterInput {
+export interface CharacterFilterInput {
   name?: string;
   status?: string;
   species?: string;
@@ -12,7 +12,7 @@ interface CharacterFilterInput {
   onlyFavorites?: boolean;
 }
 
-interface GetCharactersParams {
+export interface GetCharactersParams {
   filter?: CharacterFilterInput;
   sortByName?: 'ASC' | 'DESC';
 }

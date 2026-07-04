@@ -1,12 +1,17 @@
-import { characterService } from '../services/character.service';
+import { characterService, type CharacterFilterInput } from '../services/character.service';
 import { characterQueryService } from '../services/characterQuery.service';
 import { favoriteService } from '../services/favorite.service';
 import { commentService } from '../services/comment.service';
 import { characterAdminService } from '../services/characterAdmin.service';
 
+interface CharactersQueryArgs {
+  filter?: CharacterFilterInput;
+  sortByName?: 'ASC' | 'DESC';
+}
+
 export const resolvers = {
   Query: {
-    characters: async (_: unknown, args: any) => {
+    characters: async (_: unknown, args: CharactersQueryArgs) => {
       try {
         return await characterQueryService.search({
           filter: args.filter,
