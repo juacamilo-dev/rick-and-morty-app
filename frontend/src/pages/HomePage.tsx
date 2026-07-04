@@ -68,25 +68,70 @@ function HomePage() {
     (appliedFilters.status !== '' ? 1 : 0) +
     (appliedFilters.gender !== '' ? 1 : 0);
 
+  // El panel de filtros y el detalle en mobile son overlays de pantalla completa
+  // controlados solo por estado de React, sin entrada propia en el historial del
+  // navegador. Sin esto, el boton de atras del telefono intenta salir de la app
+  // en vez de cerrar el overlay. Se sincroniza empujando una entrada falsa al
+  // abrir, y escuchando popstate para cerrar cuando el usuario presiona atras.
+  useEffect(() => {
+    if (isPanelOpen) {
+      window.history.pushState({ overlay: 'filters' }, '');
+    }
+  }, [isPanelOpen]);
+
+  useEffect(() => {
+    if (selectedId && !window.matchMedia('(min-width: 768px)').matches) {
+      window.history.pushState({ overlay: 'detail' }, '');
+    }
+  }, [selectedId]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (isPanelOpen) {
+        setIsPanelOpen(false);
+      } else if (selectedId && !window.matchMedia('(min-width: 768px)').matches) {
+        setSelectedId(null);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [isPanelOpen, selectedId]);
+
   const handleToggleFilterPanel = () => {
-    if (!isPanelOpen) setDraftFilters(appliedFilters);
-    setIsPanelOpen(!isPanelOpen);
+    if (isPanelOpen) {
+      // Consume la entrada falsa que se empujo al abrir; popstate cierra el panel.
+      window.history.back();
+      return;
+    }
+    setDraftFilters(appliedFilters);
+    setIsPanelOpen(true);
   };
 
   const handleApplyFilters = () => {
     setAppliedFilters(draftFilters);
-    setIsPanelOpen(false);
+    window.history.back();
   };
 
   const handleClearFilters = () => {
     setDraftFilters(DEFAULT_FILTERS);
     setAppliedFilters(DEFAULT_FILTERS);
     setName('');
-    setIsPanelOpen(false);
+    window.history.back();
+  };
+
+  const handleCloseFilterPanel = () => {
+    window.history.back();
   };
 
   const handleSelectCharacter = (id: string) => {
     setSelectedId((currentId) => (currentId === id ? null : id));
+  };
+
+  // Solo el overlay mobile de detalle empuja una entrada de historial; cerrarlo
+  // debe consumirla con history.back() en vez de limpiar el estado directo.
+  const handleCloseMobileDetail = () => {
+    window.history.back();
   };
 
   return (
@@ -104,7 +149,7 @@ function HomePage() {
                 onChange={setDraftFilters}
                 onApply={handleApplyFilters}
                 onClear={handleClearFilters}
-                onClose={() => setIsPanelOpen(false)}
+                onClose={handleCloseFilterPanel}
                 speciesOptions={SPECIES_OPTIONS}
                 statusOptions={STATUS_OPTIONS}
                 genderOptions={GENDER_OPTIONS}
@@ -151,13 +196,13 @@ function HomePage() {
         <div className="fixed inset-0 z-40 overflow-y-auto bg-white p-4 md:hidden">
           <button
             type="button"
-            onClick={() => setSelectedId(null)}
+            onClick={handleCloseMobileDetail}
             aria-label="Back"
             className="mb-4 text-xl"
           >
             ←
           </button>
-          <CharacterDetail characterId={selectedId} onDeleted={() => setSelectedId(null)} />
+          <CharacterDetail characterId={selectedId} onDeleted={handleCloseMobileDetail} />
         </div>
       )}
     </div>
