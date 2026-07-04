@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CHARACTERS } from '../graphql/characters';
 import type { Character } from '../types/character';
@@ -62,6 +62,18 @@ function HomePage() {
     }
     return characters;
   }, [data, appliedFilters.character]);
+
+  // Al cargar en desktop, selecciona el primer personaje de la lista para que
+  // el panel de detalle no arranque vacio. No corre en mobile (el detalle ahi
+  // es una pantalla completa que taparia la lista al entrar) ni de nuevo si el
+  // usuario ya deselecciono algo a proposito.
+  const hasAutoSelected = useRef(false);
+  useEffect(() => {
+    if (hasAutoSelected.current || displayedCharacters.length === 0) return;
+    if (!window.matchMedia('(min-width: 768px)').matches) return;
+    hasAutoSelected.current = true;
+    setSelectedId(displayedCharacters[0].id);
+  }, [displayedCharacters]);
 
   const activeFilterCount =
     (appliedFilters.character !== 'all' ? 1 : 0) +
