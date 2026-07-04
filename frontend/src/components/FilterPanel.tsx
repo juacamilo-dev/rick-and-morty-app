@@ -104,7 +104,7 @@ function FilterPanel(props: FilterPanelProps) {
   return (
     <div ref={panelRef} className="contents">
       {/* Desktop dropdown: closing without clicking "Filter" discards the draft selection */}
-      <div className="absolute right-0 top-full z-20 mt-2 hidden w-80 rounded-xl border border-gray-200 bg-white p-4 shadow-lg md:block">
+      <div className="absolute left-0 right-0 top-full z-20 mt-2 hidden w-full rounded-xl border border-gray-200 bg-white p-4 shadow-lg md:block">
         <FilterPanelContent {...props} />
       </div>
 
