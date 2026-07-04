@@ -27,7 +27,7 @@ function CharacterCard({ character, isSelected, onSelect }: CharacterCardProps) 
         if (event.key === 'Enter' || event.key === ' ') onSelect(character.id);
       }}
       className={`flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors ${
-        isSelected ? 'bg-purple-100' : 'hover:bg-gray-50'
+        isSelected ? 'bg-lilac-bg' : 'hover:bg-gray-50'
       }`}
     >
       <img
@@ -36,15 +36,15 @@ function CharacterCard({ character, isSelected, onSelect }: CharacterCardProps) 
         className="h-12 w-12 rounded-full object-cover"
       />
       <div className="min-w-0 flex-1">
-        <p className="truncate font-medium text-gray-900">{character.name}</p>
-        <p className="truncate text-sm text-gray-500">{character.species}</p>
+        <p className="truncate font-bold text-ink">{character.name}</p>
+        <p className="truncate text-sm text-muted">{character.species}</p>
       </div>
       <button
         type="button"
         onClick={handleToggleFavorite}
         aria-label={character.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         className={`shrink-0 text-xl transition-colors ${
-          character.isFavorite ? 'text-green-500' : 'text-gray-300 hover:text-green-400'
+          character.isFavorite ? 'text-heart-green' : 'text-gray-300 hover:text-heart-green'
         }`}
       >
         {character.isFavorite ? '♥' : '♡'}

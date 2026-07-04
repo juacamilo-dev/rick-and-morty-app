@@ -94,7 +94,7 @@ function HomePage() {
     <div className="flex min-h-screen flex-col bg-white md:h-screen md:flex-row md:overflow-hidden">
       <aside className="flex w-full flex-col border-b border-gray-200 p-4 md:w-96 md:h-full md:border-b-0 md:border-r md:p-6">
         <div className="shrink-0">
-          <h1 className="mb-4 text-xl font-semibold text-gray-900">Rick and Morty list</h1>
+          <h1 className="mb-4 text-xl font-bold text-ink">Rick and Morty list</h1>
 
           <div className="relative mb-4 flex items-center justify-between gap-3">
             <SearchBar value={name} onChange={setName} onToggleFilters={handleToggleFilterPanel} />
@@ -113,13 +113,13 @@ function HomePage() {
             )}
           </div>
 
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-2 flex items-center justify-between">
             <SortControl value={sortOrder} onChange={setSortOrder} />
           </div>
 
           {activeFilterCount > 0 && (
-            <div className="mb-4 flex items-center gap-2">
-              <span className="text-sm text-gray-500">{displayedCharacters.length} Results</span>
+            <div className="mb-2 flex items-center gap-2">
+              <span className="text-sm text-muted">{displayedCharacters.length} Results</span>
               <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
                 {activeFilterCount} Filter{activeFilterCount > 1 ? 's' : ''}
               </span>
@@ -144,7 +144,7 @@ function HomePage() {
         {selectedId ? (
           <CharacterDetail characterId={selectedId} onDeleted={() => setSelectedId(null)} />
         ) : (
-          <p className="text-gray-400">Select a character to see the details.</p>
+          <p className="text-muted">Select a character to see the details.</p>
         )}
       </section>
 

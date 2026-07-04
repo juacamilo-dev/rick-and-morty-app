@@ -13,7 +13,7 @@ interface ToggleGroupProps {
 function ToggleGroup({ title, options, value, onChange }: ToggleGroupProps) {
   return (
     <div>
-      <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">
+      <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
         {title}
       </h3>
       <div className="flex flex-wrap gap-2">
@@ -26,8 +26,8 @@ function ToggleGroup({ title, options, value, onChange }: ToggleGroupProps) {
               onClick={() => onChange(option.value)}
               className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
                 isActive
-                  ? 'border-purple-600 bg-purple-600 text-white'
-                  : 'border-gray-200 bg-gray-100 text-gray-600 hover:bg-purple-100'
+                  ? 'border-violet bg-violet text-white'
+                  : 'border-gray-200 bg-gray-100 text-muted hover:bg-lilac-bg'
               }`}
             >
               {option.label}

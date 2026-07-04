@@ -47,26 +47,26 @@ function CharacterDetail({ characterId, onDeleted }: CharacterDetailProps) {
           className="h-32 w-32 rounded-full object-cover"
         />
         {character.isFavorite && (
-          <span className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white">
+          <span className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-heart-green text-white">
             ♥
           </span>
         )}
       </div>
 
-      <h1 className="mb-4 text-2xl font-semibold text-gray-900">{character.name}</h1>
+      <h1 className="mb-4 text-2xl font-bold text-ink">{character.name}</h1>
 
       <dl className="divide-y divide-gray-100 border-t border-gray-100">
         <div className="py-3">
-          <dt className="text-xs text-gray-400">Specie</dt>
-          <dd className="text-sm text-gray-800">{character.species}</dd>
+          <dt className="text-xs text-muted">Specie</dt>
+          <dd className="text-sm text-ink">{character.species}</dd>
         </div>
         <div className="py-3">
-          <dt className="text-xs text-gray-400">Status</dt>
-          <dd className="text-sm text-gray-800">{character.status}</dd>
+          <dt className="text-xs text-muted">Status</dt>
+          <dd className="text-sm text-ink">{character.status}</dd>
         </div>
         <div className="py-3">
-          <dt className="text-xs text-gray-400">Origin</dt>
-          <dd className="text-sm text-gray-800">{character.origin}</dd>
+          <dt className="text-xs text-muted">Origin</dt>
+          <dd className="text-sm text-ink">{character.origin}</dd>
         </div>
       </dl>
 
@@ -77,7 +77,7 @@ function CharacterDetail({ characterId, onDeleted }: CharacterDetailProps) {
           className={`mt-4 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
             character.isFavorite
               ? 'bg-green-100 text-green-700 hover:bg-green-200'
-              : 'bg-gray-100 text-gray-600 hover:bg-purple-100'
+              : 'bg-lilac-icon-bg text-violet hover:bg-lilac-bg'
           }`}
         >
           {character.isFavorite ? '♥ Favorited' : '♡ Add to favorites'}
