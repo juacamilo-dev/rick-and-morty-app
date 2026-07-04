@@ -20,6 +20,7 @@ async function startServer() {
   const app = express();
 
   app.use(cors());
+  app.use(json());
   app.use(requestLogger);
 
   const apolloServer = new ApolloServer({
@@ -29,7 +30,7 @@ async function startServer() {
 
   await apolloServer.start();
 
-  app.use('/graphql', json(), expressMiddleware(apolloServer));
+  app.use('/graphql', expressMiddleware(apolloServer));
 
   app.listen(PORT, () => {
     console.log(`[Server] Backend corriendo en http://localhost:${PORT}/graphql`);
