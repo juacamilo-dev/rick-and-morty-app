@@ -92,7 +92,7 @@ function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-white md:h-screen md:flex-row md:overflow-hidden">
-      <aside className="flex w-full flex-col border-b border-gray-200 p-4 md:w-96 md:h-full md:border-b-0 md:border-r md:p-6">
+      <aside className="flex w-full flex-col border-b border-gray-200 px-6 py-4 md:w-96 md:h-full md:border-b-0 md:border-r md:px-8 md:py-6">
         <div className="shrink-0">
           <h1 className="mb-4 text-xl font-bold text-ink">Rick and Morty list</h1>
 

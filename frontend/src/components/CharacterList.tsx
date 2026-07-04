@@ -12,13 +12,13 @@ function CharacterList({ characters, selectedId, onSelect }: CharacterListProps)
   const others = characters.filter((character) => !character.isFavorite);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col">
       {starred.length > 0 && (
         <section>
           <h2 className="sticky top-0 z-10 bg-white py-2 text-xs font-semibold tracking-wide text-muted">
             STARRED CHARACTERS ({starred.length})
           </h2>
-          <div className="flex flex-col gap-1">
+          <div className="divide-y divide-gray-200">
             {starred.map((character) => (
               <CharacterCard
                 key={character.id}
@@ -31,11 +31,11 @@ function CharacterList({ characters, selectedId, onSelect }: CharacterListProps)
         </section>
       )}
 
-      <section>
+      <section className={starred.length > 0 ? 'mt-8' : ''}>
         <h2 className="sticky top-0 z-10 bg-white py-2 text-xs font-semibold tracking-wide text-muted">
           CHARACTERS ({others.length})
         </h2>
-        <div className="flex flex-col gap-1">
+        <div className="divide-y divide-gray-200">
           {others.map((character) => (
             <CharacterCard
               key={character.id}
