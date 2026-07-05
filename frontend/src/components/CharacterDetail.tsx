@@ -39,7 +39,7 @@ function CharacterDetail({ characterId, onDeleted }: CharacterDetailProps) {
   const character = data.character;
 
   return (
-    <div className="px-4 pb-4 pt-10 md:px-[100px]">
+    <div className="pb-4 pt-10 md:px-[100px]">
       <div className="relative mb-2 h-[75px] w-[75px]">
         <img
           src={character.image}

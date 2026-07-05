@@ -193,7 +193,7 @@ function HomePage() {
       </section>
 
       {selectedId && (
-        <div className="fixed inset-0 z-40 overflow-y-auto bg-white p-4 md:hidden">
+        <div className="fixed inset-0 z-40 overflow-y-auto bg-white px-6 py-4 md:hidden">
           <button
             type="button"
             onClick={handleCloseMobileDetail}
