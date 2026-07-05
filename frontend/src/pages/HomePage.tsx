@@ -171,7 +171,7 @@ function HomePage() {
           )}
         </div>
 
-        <div className="md:min-h-0 md:flex-1 md:overflow-y-auto">
+        <div className="md:min-h-0 md:flex-1 md:overflow-y-auto md:-mx-8 -mx-6">
           {loading && <p className="text-sm text-gray-500">Loading characters...</p>}
           {error && <p className="text-sm text-red-500">Error loading characters.</p>}
           {data && (

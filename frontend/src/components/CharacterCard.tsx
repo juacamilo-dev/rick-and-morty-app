@@ -26,7 +26,7 @@ function CharacterCard({ character, isSelected, onSelect }: CharacterCardProps) 
       onKeyDown={(event) => {
         if (event.key === 'Enter' || event.key === ' ') onSelect(character.id);
       }}
-      className={`flex w-full cursor-pointer items-center gap-4 rounded-lg py-4 text-left transition-colors ${
+      className={`flex w-full cursor-pointer items-center gap-4 rounded-lg px-6 py-4 md:px-9 text-left transition-colors ${
         isSelected ? 'bg-lilac-bg' : 'hover:bg-gray-50'
       }`}
     >
