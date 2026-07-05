@@ -184,11 +184,11 @@ function HomePage() {
         </div>
       </aside>
 
-      <section className="hidden flex-1 px-6 py-4 md:block md:h-full md:overflow-y-auto md:px-16 md:py-6">
+      <section className="hidden flex-1 md:block md:h-full md:overflow-y-auto">
         {selectedId ? (
           <CharacterDetail characterId={selectedId} onDeleted={() => setSelectedId(null)} />
         ) : (
-          <p className="text-muted">Select a character to see the details.</p>
+          <p className="px-8 py-6 text-muted">Select a character to see the details.</p>
         )}
       </section>
 

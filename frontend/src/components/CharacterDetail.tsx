@@ -39,12 +39,12 @@ function CharacterDetail({ characterId, onDeleted }: CharacterDetailProps) {
   const character = data.character;
 
   return (
-    <div>
-      <div className="relative mb-4 h-32 w-32">
+    <div className="px-4 pb-4 pt-10 md:px-[100px]">
+      <div className="relative mb-2 h-[75px] w-[75px]">
         <img
           src={character.image}
           alt={character.name}
-          className="h-32 w-32 rounded-full object-cover"
+          className="h-[75px] w-[75px] rounded-full object-cover"
         />
         {character.isFavorite && (
           <span className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-heart-green text-white">
