@@ -24,7 +24,7 @@ function ToggleGroup({ title, options, value, onChange }: ToggleGroupProps) {
               key={option.value}
               type="button"
               onClick={() => onChange(option.value)}
-              className={`flex-1 md:flex-none rounded-lg border px-[10px] py-[17px] text-sm whitespace-nowrap transition-colors ${
+              className={`flex-1 rounded-lg border px-[10px] py-[17px] text-sm whitespace-nowrap transition-colors ${
                 isActive
                   ? 'border-violet bg-violet text-white'
                   : 'border-gray-200 bg-gray-100 text-muted hover:bg-lilac-bg'
