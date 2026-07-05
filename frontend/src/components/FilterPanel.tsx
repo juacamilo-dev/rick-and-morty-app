@@ -70,7 +70,7 @@ function FilterPanelContent({
         <button
           type="button"
           onClick={onApply}
-          className="flex-1 rounded-lg bg-lilac-bg px-4 py-2 text-sm font-medium text-violet transition-colors hover:bg-violet hover:text-white"
+          className="flex-1 rounded-lg bg-lilac-bg px-4 py-2 text-sm font-medium text-violet transition-colors hover:bg-violet hover:text-white active:bg-violet-dark active:text-white"
         >
           Filter
         </button>

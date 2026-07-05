@@ -42,7 +42,7 @@ function CommentSection({ characterId, comments }: CommentSectionProps) {
         type="button"
         onClick={handleSubmit}
         disabled={loading || !content.trim()}
-        className="mt-2 rounded-lg bg-violet px-4 py-2 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:opacity-50"
+        className="mt-2 rounded-lg bg-violet px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-violet-dark active:bg-violet-dark disabled:opacity-50"
       >
         Comment
       </button>
